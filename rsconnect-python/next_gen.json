@@ -1,0 +1,12 @@
+{
+    "https://spider.redbullperformance.com": {
+        "server_url": "https://spider.redbullperformance.com",
+        "filename": "/Users/ammar.elsherebasy/PycharmProjects/next_gen",
+        "app_url": "https://spider.redbullperformance.com/content/1cfb6192-1b6d-46c6-abd0-ea5a3a3f2d7e/",
+        "app_id": "1cfb6192-1b6d-46c6-abd0-ea5a3a3f2d7e",
+        "app_guid": "1cfb6192-1b6d-46c6-abd0-ea5a3a3f2d7e",
+        "title": "Next Generation Trophy 25/26",
+        "app_mode": "python-dash",
+        "app_store_version": 1
+    }
+}

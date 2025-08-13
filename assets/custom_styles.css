@@ -1,0 +1,842 @@
+/* 
+Tournament Tree Visualization - Main Stylesheet
+This file contains the core styling for the tournament visualization app.
+*/
+body, h1, h2, h3, h4, h5, h6, p, label, a, .btn {
+    font-family: 'Archivo', sans-serif;
+}
+
+/* CSS Variables for consistent theming */
+:root {
+    --primary-orange: #FF8C00;
+    --primary-blue: #4A90E2;
+    --primary-pink: #E91E63;
+    --primary-green: #8BC34A;
+    --background-gray: #F5F5F5;
+    --text-dark: #333333;
+    --rb-red: #D2003C;
+    --rb-red-darker: #790C27;
+    --rb-blue: #001D46;
+    --text-light: #FFFFFF;
+    --border-color: #DDDDDD;
+    --shadow-light: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-medium: 0 4px 8px rgba(0,0,0,0.15);
+    --border-radius: 8px;
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s ease;
+}
+
+/* Global Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Archivo', sans-serif;
+    background-color: var(--background-gray);
+    color: var(--text-dark);
+    line-height: 1.6;
+    background-image: url("images/facettenlook_vorlage_a4_rot-blau-grau.png"); /* Radial gradient from dark to light red */
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-size: 1.5vmin; /* Base font size relative to viewport */
+}
+
+/* App Container */
+.app-container {
+    height: 98vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* App Header - Disregarded as per user request */
+.app-header {
+    display: none;
+}
+
+/* View Indicator - Disregarded as per user request */
+.view-indicator {
+    display: none;
+}
+
+/* Main Content */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    padding: 2vmin;
+    height: 100%; /* Occupy full height after header/view-indicator removed */
+    margin: 0 auto;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+}
+
+/* Tournament Tree Container */
+.tournament-tree-container {
+    /*background: white;*/
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    overflow: hidden;
+    width: 100%; /* Ensure it takes full width */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Tournament Header */
+.tournament-header {
+    background: linear-gradient(135deg, var(--rb-red) 0%, var(--rb-red-darker) 100%);
+    color: var(--text-light);
+    padding: 2vmin;
+    justify-content: center;
+    align-items: center;
+    height: 7%; /* Adjusted height */
+    display: flex;
+    border-radius: var(--border-radius);
+}
+.tournament-header-goalscorers {
+    background: linear-gradient(135deg, var(--rb-red) 0%, var(--rb-red-darker) 100%);
+    color: var(--text-light);
+    padding: 2vmin;
+    justify-content: center;
+    align-items: center;
+    height: 15%; /* Adjusted height */
+    display: flex;
+    border-radius: var(--border-radius);
+}
+
+.tournament-title {
+    font-size: 3vmin;
+    font-weight: bold;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.2vmin;
+    text-align: center;
+}
+
+/* Tournament Body Layout */
+.tournament-body {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 2vmin;
+    padding: 2vmin;
+    min-height: 60vmin;
+}
+.tournament-body > div {
+    position: relative;
+}
+.tournament-body > div:not(:first-child)::before {
+    content: "";
+    position: absolute;
+    top: 5vmin;
+    bottom: 5vmin;
+    left: -1vmin; /* Half of the gap (2vmin / 2 = 1vmin) */
+    width: 0.3vmin;
+    background: linear-gradient(135deg, var(--rb-red) 0%, var(--rb-red-darker) 100%); /* modern line style */
+    opacity: 1;
+    border-radius: 0.1vmin;
+}
+
+.tournament-left,
+.tournament-center-left,
+.tournament-center-right,
+.tournament-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2vmin;
+    justify-content: center;
+}
+
+/* Group Section */
+.group-section {
+    display: flex;
+    gap: 1vmin;
+}
+
+.side-group {
+    flex: 0 0 auto;
+    width: 50%;
+    align-self: center;
+}
+
+.main-groups {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1vmin;
+    flex: 1;
+}
+
+/* Team Group Styling */
+.team-group {
+    background: var(--background-gray);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-light);
+    margin-bottom: 1vmin;
+    border: 0.1vmin solid var(--border-color);
+}
+
+.group-header {
+    padding: 0.75vmin 1vmin;
+    text-align: center;
+    font-weight: bold;
+}
+
+.group-title {
+    margin: 0;
+    font-size: 1.5vmin;
+    color: var(--text-light);
+}
+
+.team-group-cards {
+    padding: 0.5vmin;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25vmin;
+    justify-content: center;
+}
+
+/* Team Card Styling */
+.team-card {
+    display: flex;
+    align-items: center;
+    padding: 0.5vmin 0.75vmin;
+    border-radius: 2vmin;
+    color: var(--text-light);
+    font-weight: 600;
+    font-size: 1.2vmin;
+    transition: var(--transition-fast);
+    cursor: pointer;
+}
+
+.team-card:hover {
+    transform: translateY(-0.1vmin);
+    box-shadow: var(--shadow-medium);
+}
+
+.team-card-content {
+    display: grid;
+    grid-template-columns: 0.25fr 0.25fr 2fr;
+    align-items: center;
+    gap: 0.5vmin;
+    width: 100%;
+}
+
+.team-position {
+    background: rgba(255,255,255,0.3);
+    color: var(--text-light);
+    width: 2vmin;
+    height: 2vmin;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    justify-self: right;
+    font-size: 1vmin;
+    font-weight: bold;
+}
+
+.team-name {
+    flex: 1;
+    font-size: 1vmin;
+    text-align: left;
+}
+
+/* Team Card Sizes */
+.team-card-small {
+    padding: 0.25vmin 0.5vmin;
+    font-size: 1vmin;
+}
+
+.team-card-large {
+    padding: 0.75vmin 1vmin;
+    font-size: 1.5vmin;
+}
+
+/* Team Card States */
+.team-card-winner {
+    box-shadow: 0 0 0 0.3vmin gold;
+}
+
+.team-card-eliminated {
+    opacity: 0.6;
+    filter: grayscale(50%);
+}
+
+/* Quarter Finals Section */
+.quarter-finals-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2vmin;
+}
+
+.qf-left,
+.qf-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1vmin;
+    flex: 1;
+}
+
+/* Quarter Final Bracket */
+.quarter-final-bracket {
+    /*background: white;*/
+    /*border: 0.2vmin solid var(--border-color);*/
+    border-radius: var(--border-radius);
+    padding: 1vmin;
+    text-align: center;
+}
+
+.qf-matchup,
+.sf-matchup {
+    display: grid;
+    grid-template-columns: 1fr 0.25fr 1fr;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5vmin;
+    margin-bottom: 0.5vmin;
+}
+
+.qf-team,
+.sf-team{
+    padding: 0.5vmin 1vmin;
+    border-radius: 2vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5vmin;
+}
+.qf-text,
+.sf-text {
+    font-size: 1.2vmin;
+    font-weight: 600;
+    min-width: 8vmin;
+    color: var(--text-light);
+}
+.qf-vs,
+.sf-vs {
+    background: var(--text-dark);
+    color: var(--text-light);
+    padding: 0.25vmin 0.5vmin;
+    border-radius: 0.4vmin;
+    font-size: 1vmin;
+    font-weight: bold;
+}
+
+.qf-label,
+.sf-label {
+    font-weight: bold;
+    color: var(--text-dark);
+    font-size: 1.2vmin;
+}
+
+/* Semi Finals Section */
+.semi-finals-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.semi-final-top,
+.semi-final-bottom {
+    flex: 1;
+    justify-content: center;
+    gap: 0.5vmin;
+    /*background: white;*/
+    /*border: 0.2vmin dashed var(--border-color);*/
+    border-radius: var(--border-radius);
+    padding: 1vmin;
+    text-align: center;
+    margin-bottom: 1vmin;
+    align-items: center;
+}
+
+.semi-final-placeholder {
+    background: white;
+    height: 10vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--border-color);
+    font-weight: 600;
+}
+
+.sf-label {
+    font-weight: bold;
+    color: var(--text-dark);
+    font-size: 1.2vmin;
+}
+
+/* Finals Section */
+.finals-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vmin;
+}
+
+.final-bracket {
+    background: linear-gradient(135deg, gold 0%, #FFD700 100%);
+    border-radius: var(--border-radius);
+    padding: 2vmin;
+    text-align: center;
+    box-shadow: var(--shadow-medium);
+    position: relative;
+}
+
+.trophy-icon {
+    font-size: 2vmin;
+    margin: 0 1vmin;
+}
+
+.final-matchup {
+    align-items: center;
+    justify-content: center;
+    gap: 1vmin;
+    margin: 1vmin 0;
+    display: grid;
+    grid-template-columns: 2fr 0.75fr 2fr;
+}
+
+.finalist {
+    background: white;
+    padding: 0.75vmin 1.5vmin;
+    border-radius: 2.5vmin;
+    font-weight: bold;
+    color: var(--text-dark);
+    min-width: 12vmin;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.final-vs {
+    background: var(--text-dark);
+    color: var(--text-light);
+    padding: 0.5vmin 1vmin;
+    border-radius: 0.8vmin;
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.final-label {
+    font-size: 1.8vmin;
+    font-weight: bold;
+    color: var(--text-dark);
+    margin: 0.5vmin 0;
+}
+
+/* Placement Brackets */
+.placement-bracket {
+    border-radius: var(--border-radius);
+    padding: 1vmin;
+    text-align: center;
+    margin-bottom: 1vmin;
+    align-items: center;
+}
+
+.placement-label {
+    font-weight: bold;
+    color: var(--text-dark);
+    margin-bottom: 0.5vmin;
+    font-size: 1.2vmin;
+}
+
+.placement-matchup {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5vmin;
+}
+
+.placement-team {
+    background: var(--background-gray);
+    padding: 0.5vmin 1vmin;
+    border-radius: 2vmin;
+    font-size: 1.2vmin;
+    font-weight: 600;
+    min-width: 8vmin;
+}
+
+.placement-vs {
+    background: var(--text-dark);
+    color: var(--text-light);
+    padding: 0.25vmin 0.5vmin;
+    border-radius: 0.4vmin;
+    font-size: 1vmin;
+    font-weight: bold;
+}
+
+/* Placement Section */
+.placement-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Responsive Design */
+/*@media (max-width: 1200px) {*/
+/*    .tournament-body {*/
+/*        grid-template-columns: 1fr;*/
+/*        gap: 1vmin;*/
+/*    }*/
+
+/*    .main-groups {*/
+/*        grid-template-columns: repeat(4, 1fr);*/
+/*    }*/
+/*}*/
+
+/*@media (max-width: 768px) {*/
+/*    .main-content {*/
+/*        padding: 1vmin;*/
+/*    }*/
+
+/*    .tournament-title {*/
+/*        font-size: 2.5vmin;*/
+/*    }*/
+
+/*    .header-content {*/
+/*        flex-direction: column;*/
+/*        gap: 1vmin;*/
+/*        text-align: center;*/
+/*    }*/
+
+/*    .main-groups {*/
+/*        grid-template-columns: repeat(2, 1fr);*/
+/*    }*/
+
+/*    .quarter-finals-section {*/
+/*        flex-direction: column;*/
+/*    }*/
+
+/*    .statistics-content {*/
+/*        grid-template-columns: 1fr;*/
+/*    }*/
+/*}*/
+
+/* Animation and Transitions */
+.view-content {
+    animation: fadeIn 0.5s ease-in-out;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(2vmin);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/*IMAGES*/
+.team-logo,
+.qf-logo,
+.sf-logo,
+.placement-team-logo,
+.finalist-logo {
+    height: 3.5vmin;
+    width: 3.5vmin;
+    object-fit: scale-down;
+    justify-self: center;
+    display: block;
+}
+
+
+/*!* Tournament Table View *!*/
+/*.tournament-table-view {*/
+/*    background: white;*/
+/*    border-radius: var(--border-radius);*/
+/*    box-shadow: var(--shadow-light);*/
+/*    padding: 2vmin;*/
+/*    flex: 1; !* Allow it to grow and shrink *!*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    overflow: hidden; !* Hide overflow for the container *!*/
+/*    height: 100%;*/
+/*}*/
+
+.tournament-table1 {
+    width: 100%;
+    min-width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    table-layout: fixed;
+    font-size: 1.25vmin;
+    font-weight: 400;
+    display: inline-table;
+    /*flex-direction: column; !* Stack header and body vertically *!*/
+}
+
+
+.tournament-table1 th,
+.tournament-table1 td {
+    padding: 0.05vmin;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 0.05vmin solid var(--border-color);
+    color: var(--text-dark);
+    white-space: nowrap; /* Prevent text wrapping in cells */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+}
+
+.tournament-table1 th {
+    background: var(--rb-red);
+    font-weight: bold;
+    color: var(--text-light);
+}
+
+.table-container-wrapper {
+    display: block;
+    /*flex-direction: column;*/
+    /*height: 75%;*/
+}
+
+.table-header-cell-fixture-header1,
+.table-body-cell.fixture-cell1 {
+  width: 10%;
+}
+/*.table-header-cell-result-header1,*/
+/*.table-body-cell.result-cell1 {*/
+/*  width: 15%;*/
+/*}*/
+.table-header-cell-match-id-header1,
+.table-body-cell1:nth-child(1) {
+  width: 10%;
+}
+.table-header-cell-pitch-header1,
+.table-body-cell1:nth-child(2) {
+  width: 10%;
+}
+.table-header-cell-fixture-header1,
+.table-body-cell.fixture-cell1 {
+  width: 60%;
+}
+.table-header-cell-result-header1,
+.table-body-cell.result-cell1 {
+  width: 10%;
+}
+.table-header-cell-time-header1,
+.table-body-cell.result-cell1 {
+  width: 10%;
+}
+
+.table-section-title1 {
+    display: flex;
+    justify-content: center;
+    font-weight: bolder;
+    background: var(--rb-blue);
+    color: var(--text-light);
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+.view-title {
+    margin-bottom: 2vmin;
+    color: var(--text-dark);
+    font-size: 3vmin;
+    text-align: center;
+}
+
+.table-body-cell-fixture-cell-images1 {
+    background: none;
+    padding: 0;
+}
+
+
+.table-body-cell.fixture-cell-text1 {
+    font-size: 1.2vmin;
+    justify-self: center;
+    text-align: center;
+    width: 100%;
+}
+.table-body-cell.fixture-cell-container1 {
+    padding: 0;
+    width: 100%;
+    margin: 0;
+    gap: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.tournament-matches-container {
+    display: flex;
+    flex-direction: column;
+    height: 98%;
+    align-content: center;
+}
+.tournament-matches-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2vmin;
+    padding: 2vmin;
+    height: 93%;
+    overflow-y: scroll;
+}
+.tournament-matches-groups {
+    display: flex;
+    flex-direction: column;
+    height: 98%;
+    /*overflow-y: hidden;*/
+}
+.tournament-matches.group-section {
+    display: flex;
+    padding: 0 0 1vmin 0;
+    /*height: 12.5%;*/
+}
+.tournament-matches-main-groups {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1vmin;
+    flex: 1;
+    width: 100%
+}
+
+.tournament-matches.placement-matchup {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    /*gap: 0.5vmin;*/
+}
+
+.tournament-matches.placement-team-logo {
+    height: 2vmin;
+    width: 2vmin;
+    object-fit: scale-down;
+    justify-self: center;
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+ /* GOALSCORERS */
+.tournament-goalscorers-container {
+    display: flex;
+    flex-direction: column;
+    height: 98%;
+    align-content: center;
+}
+.goalscorer-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2vmin;
+    padding: 2vmin;
+    height: 93%;
+    overflow-y: scroll;
+}
+.goalscorer-tournament-table {
+    width: 100%;
+    min-width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    table-layout: fixed;
+    font-size: 3vmin;
+    font-weight: 400;
+    display: inline-table;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+
+}
+.goalscorer-tournament-table th,
+.goalscorer-tournament-table td {
+    padding: 1vmin;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 0.3vmin solid var(--border-color);
+    color: var(--text-dark);
+    white-space: nowrap; /* Prevent text wrapping in cells */
+    overflow: hidden; /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add ellipsis for overflowing text */
+}
+
+.goalscorer-tournament-table th {
+    font-weight: bolder;
+    color: var(--text-light);
+    justify-content: center;
+    background: var(--rb-blue);
+}
+
+.goalscorer-table th:first-child {
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+}
+.goalscorer-table th:last-child {
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+}
+.goalscorer-table.player-card{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.goalscorer-table.team-logo {
+    height: 5vmin;
+    width: 6vmin;
+    object-fit: scale-down;
+    justify-self: center;
+    display: block;
+    padding: 0 1vmin 0 0;
+    margin: 0;
+}
+.goalscorer-table-header-cell-place-header {
+    width: 10%;
+}
+
+.goalscorer-table-header-cell-player-header {
+    width: 60%;
+}
+
+.goalscorer-table-header-cell-team-header {
+  width: 30%;
+}
+.goalscorer-table-header-cell-goals-header {
+  width: 10%;
+}
+/*.goalscorer-table-header-cell-player-header {*/
+/*    text-align: left;*/
+/*}*/
+
+.live-dot {
+      width: 0.5vmin;
+      height: 0.5vmin;
+      border-radius: 50%;
+      background: #e11;               /* red color */
+      display: inline-block;
+      margin-right: 8px;
+      box-shadow: 0 0 0 rgba(225,17,17,0.7);
+      animation: live-pulse 1s infinite ease-in-out;
+      vertical-align: middle;
+}
+/* pulsing glow + size tweak */
+@keyframes live-pulse {
+      0% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(225,17,17,0.7);
+            opacity: 1;
+      }
+      50% {
+            transform: scale(1.25);
+            box-shadow: 0 0 12px 6px rgba(225,17,17,0.12);
+            opacity: 0.85;
+      }
+      100% {
+            transform: scale(1);
+            box-shadow: 0 0 0 0 rgba(225,17,17,0.7);
+            opacity: 1;
+  }
+}
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+      .live-dot {
+            animation: none;
+      }
+}
