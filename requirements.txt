@@ -8,6 +8,5 @@ setuptools
 dash-bootstrap-components
 google-cloud-bigquery
 google-auth
-pandas
 pyarrow
 db-dtypes
